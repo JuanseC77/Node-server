@@ -1,19 +1,16 @@
-const fs = require("fs"); 
-const readline = require("readline"); 
-
+const fs = require("fs");
+const readline = require("readline");
 
 const rl = readline.createInterface({
-  input: process.stdin, 
-  output: process.stdout 
+  input: process.stdin,
+  output: process.stdout,
 });
-
 
 const fileName = "tareas.json";
 
-
 const readTasks = () => {
-  try {   
-    const data = fs.readFileSync(fileName, "utf8");    
+  try {
+    const data = fs.readFileSync(fileName, "utf8");
     const tasks = JSON.parse(data);
     return tasks;
   } catch (error) {
@@ -31,14 +28,18 @@ const writeTasks = (tasks) => {
 };
 
 const showTasks = (tasks) => {
-  for (let key in tasks) {
-    let task = tasks[key];
-    console.log(`${key}. ${task.description} - ${task.done ? "Completada" : "Pendiente"}`);
+  for (let id in tasks) {
+    let task = tasks[id];
+    console.log(
+      `${id}. ${task.description} - ${
+        task.done ? "Completada" : "Pendiente"
+      }`
+    );
   }
 };
 
 const addTask = (tasks, description) => {
-  let id = Date.now();
+  let id = Date.now().toString(); // Generamos un identificador único
   let task = {
     description: description,
     done: false,
@@ -50,7 +51,7 @@ const deleteTask = (tasks, id) => {
   if (tasks.hasOwnProperty(id)) {
     delete tasks[id];
   } else {
-    console.error("No existe una tarea con ese indicador");
+    console.error("No existe una tarea con ese identificador");
   }
 };
 
@@ -58,7 +59,7 @@ const completeTask = (tasks, id) => {
   if (tasks.hasOwnProperty(id)) {
     tasks[id].done = true;
   } else {
-    console.error("No existe una tarea con ese indicador");
+    console.error("No existe una tarea con ese identificador");
   }
 };
 
@@ -87,14 +88,14 @@ const processOption = (option) => {
       });
       break;
     case "3":
-      rl.question("Escribe el indicador de la tarea a eliminar: ", (id) => {
+      rl.question("Escribe el identificador de la tarea a eliminar: ", (id) => {
         deleteTask(tasks, id);
         writeTasks(tasks);
         console.log("Tarea eliminada correctamente");
       });
       break;
     case "4":
-      rl.question("Escribe el indicador de la tarea a completar: ", (id) => {
+      rl.question("Escribe el identificador de la tarea a completar: ", (id) => {
         completeTask(tasks, id);
         writeTasks(tasks);
         console.log("Tarea completada correctamente");
