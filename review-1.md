@@ -8,6 +8,7 @@ Eliminar tareas: Los usuarios las usarían para eliminar tareas que ya no son re
 Ver todas las tareas: Los usuarios las usarían para revisar su lista de tareas pendientes en un solo vistazo.
 Esta aplicación es útil para cualquier persona que necesite llevar un registro de tareas pendientes y desee hacerlo desde la línea de comandos. Puede ser especialmente útil para desarrolladores y usuarios que prefieren una interfaz de línea de comandos para la gestión de tareas.
 
+esta task-list hace uso de express router. su funcionalidad se hace posible gracias a los midelwares del router.
 
 
 
